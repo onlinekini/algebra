@@ -3,17 +3,17 @@ package learn.oki.lsn1;
 import java.util.Arrays;
 
 public abstract class AbsVector {
-	private float dimension;
-	private float[] coordinates;
+	private double dimension;
+	private double[] coordinates;
 	
-	public AbsVector(float[] coorrdinates) {
+	public AbsVector(double[] coorrdinates) {
 		this.dimension = 0;
 		this.coordinates = coorrdinates;
 		double temp = 0.0;
-		for (float val : coorrdinates) {
+		for (double val : coorrdinates) {
 			temp += val*val;
 		}
-		dimension = (float)Math.sqrt(temp);
+		dimension = Math.sqrt(temp);
 	}
 	
 	public boolean equals(Vector w) {
@@ -24,8 +24,8 @@ public abstract class AbsVector {
 		return retval;
 	}
 	
-	public float[] normalize() {
-		float[] resultcorrdinates = new float[getCoordinates().length];
+	public double[] normalize() {
+		double[] resultcorrdinates = new double[getCoordinates().length];
 		
 		for (int i=0; i < getCoordinates().length; i++) {
 			resultcorrdinates[i] = getCoordinates()[i] / getDimension(); 
@@ -39,15 +39,15 @@ public abstract class AbsVector {
 				" coord: " + Arrays.toString(this.getCoordinates()) ;
 	}
 	
-	public float getDimension() {
+	public double getDimension() {
 		return dimension;
 	}
 
-	public float[] getCoordinates() {
+	public double[] getCoordinates() {
 		return coordinates;
 	}
 
-	public void setCoordinates(float[] corrdinates) {
+	public void setCoordinates(double[] corrdinates) {
 		this.coordinates = corrdinates;
 	}
 	

@@ -6,7 +6,7 @@ public class VectorProcessor {
 		if (w.getCoordinates().length != v.getCoordinates().length) {
 			throw new Exception("dimentions not same");
 		}
-		float[] resultcorrdinates = new float[w.getCoordinates().length];
+		double[] resultcorrdinates = new double[w.getCoordinates().length];
 		
 		for (int i=0; i < v.getCoordinates().length; i++) {
 			resultcorrdinates[i] = v.getCoordinates()[i] + w.getCoordinates()[i]; 
@@ -18,7 +18,7 @@ public class VectorProcessor {
 		if (w.getCoordinates().length != v.getCoordinates().length) {
 			throw new Exception("dimentions not same");
 		}
-		float[] resultcorrdinates = new float[w.getCoordinates().length];
+		double[] resultcorrdinates = new double[w.getCoordinates().length];
 		
 		for (int i=0; i < v.getCoordinates().length; i++) {
 			resultcorrdinates[i] = v.getCoordinates()[i] - w.getCoordinates()[i]; 
@@ -26,11 +26,11 @@ public class VectorProcessor {
 		return new Vector(resultcorrdinates);
 	}
 	
-	public static AbsVector scalarMul(float val, AbsVector v) {
-		float[] resultcorrdinates = new float[v.getCoordinates().length];
+	public static AbsVector scalarMul(double val, AbsVector v) {
+		double[] resultcorrdinates = new double[v.getCoordinates().length];
 		
 		int j = 0;
-		for (float i : v.getCoordinates()) {
+		for (double i : v.getCoordinates()) {
 			resultcorrdinates[j++] = i * val; 
 		}
 		return new Vector(resultcorrdinates);
@@ -38,9 +38,10 @@ public class VectorProcessor {
 	
 	public static double dotProduct(AbsVector v, AbsVector w) {
 		double finalValue = 0;
-		for (int i=0; i < v.getCoordinates().length; i++) {
+		for (int i = 0; i < v.getCoordinates().length; i++) {
 			finalValue += v.getCoordinates()[i] * w.getCoordinates()[i]; 
 		}
+		//System.out.println("DOT : " + finalValue);
 		return finalValue;
 	}
 	
@@ -57,8 +58,66 @@ public class VectorProcessor {
 		} else {
 			return Math.toDegrees(outputRad);
 		}
+	}
+	
+	public static boolean isParallel(AbsVector v, AbsVector w) {
+		double divVal = 0;
+		double tempDivVal = 0;
+		boolean isParallel = true;
+		for (int i=0; i < v.getCoordinates().length; i++) {
+			tempDivVal = v.getCoordinates()[i] / w.getCoordinates()[i];
+			if (i == 0) {
+				divVal = tempDivVal;
+			} else {
+				if ((int)divVal*1000 != (int)tempDivVal*1000) {
+					isParallel = false;
+					break;
+				}
+			}
+		}
+		return isParallel;
+	}
+	
+	
+	public static boolean isOrthogonal(AbsVector v, AbsVector w) {
+		if ((int) dotProduct(v, w) * 100 < 1e-10) {
+			//System.out.println(dotProduct(v, w));
+			return true;
+		}
+		return false;
+	}
+	
+	
+	public static String isParallelOrOrthogonal(AbsVector v, AbsVector w) {
+		boolean isParallel = false;
+		boolean isOrthogonal = false;
+		isParallel = isParallel(v, w);
+		isOrthogonal = isOrthogonal(v, w);
 		
+		if (isOrthogonal && isParallel) {
+			return "PARALLEL & ORTHOGONAL";
+		} else if (isOrthogonal) {
+			return "ORTHOGONAL";
+		} else if (isParallel) {
+			return "PARALLEL";
+		} else {
+			return "NONE";
+		}
 		
+	}
+	
+	
+	public static AbsVector projection(AbsVector v, NonUnitVector b) {
+		return scalarMul(dotProduct(v, b.getUnitVector()), b.getUnitVector());
+	}
+	
+	public static AbsVector getOrthogonalBetween(AbsVector v, NonUnitVector b) {
+		try {
+			return sub(v, projection(v, b));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new Vector(new double[]{0,0,0});
 	}
 	
 }
