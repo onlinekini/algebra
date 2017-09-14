@@ -1,6 +1,6 @@
 package learn.oki.lsn1;
 
-public class Vector extends AbsVector {
+public class Vector extends AbsVector implements NonUnitVector {
 
 	UnitVector unit;
 	
@@ -8,7 +8,7 @@ public class Vector extends AbsVector {
 		return unit;
 	}
 	
-	public Vector(float[] coorrdinates) {
+	public Vector(double[] coorrdinates) {
 		super(coorrdinates);
 		createUnitVector(this);
 	}

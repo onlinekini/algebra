@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class UnitVector extends AbsVector {
 	
-	public UnitVector(float[] coorrdinates) {
+	public UnitVector(double[] coorrdinates) {
 		super(coorrdinates);
 		//System.out.println(Arrays.toString(coorrdinates));
 	}
