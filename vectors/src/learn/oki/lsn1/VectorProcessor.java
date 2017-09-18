@@ -2,6 +2,14 @@ package learn.oki.lsn1;
 
 public class VectorProcessor {
 	
+	/**
+	 * Computes the sum of two vectors- Vector addition
+	 * 
+	 * @param v
+	 * @param w
+	 * @return
+	 * @throws Exception
+	 */
 	public static AbsVector sum(AbsVector v, AbsVector w) throws Exception {
 		if (w.getCoordinates().length != v.getCoordinates().length) {
 			throw new Exception("dimentions not same");
@@ -14,6 +22,14 @@ public class VectorProcessor {
 		return new Vector(resultcorrdinates);
 	}
 	
+	/**
+	 * Computes the difference between two vectors- Vector subtraction
+	 * 
+	 * @param v
+	 * @param w
+	 * @return
+	 * @throws Exception
+	 */
 	public static AbsVector sub(AbsVector v, AbsVector w) throws Exception {
 		if (w.getCoordinates().length != v.getCoordinates().length) {
 			throw new Exception("dimentions not same");
@@ -26,6 +42,13 @@ public class VectorProcessor {
 		return new Vector(resultcorrdinates);
 	}
 	
+	/**
+	 * Scalar multiplication 
+	 * 
+	 * @param val
+	 * @param v
+	 * @return
+	 */
 	public static AbsVector scalarMul(double val, AbsVector v) {
 		double[] resultcorrdinates = new double[v.getCoordinates().length];
 		
@@ -36,6 +59,13 @@ public class VectorProcessor {
 		return new Vector(resultcorrdinates);
 	}
 	
+	/**
+	 * Dot Product between two vectors
+	 * 
+	 * @param v
+	 * @param w
+	 * @return
+	 */
 	public static double dotProduct(AbsVector v, AbsVector w) {
 		double finalValue = 0;
 		for (int i = 0; i < v.getCoordinates().length; i++) {
@@ -45,6 +75,14 @@ public class VectorProcessor {
 		return finalValue;
 	}
 	
+	/**
+	 * Angle between two vectors - two options
+	 * 
+	 * @param v
+	 * @param w
+	 * @param isRad
+	 * @return
+	 */
 	public static double angleBetween(Vector v, Vector w, boolean isRad) {
 		
 		double outputRad = 0;
@@ -60,6 +98,14 @@ public class VectorProcessor {
 		}
 	}
 	
+	
+	/**
+	 * Check if the two vectors are parallel 
+	 *  
+	 * @param v
+	 * @param w
+	 * @return
+	 */
 	public static boolean isParallel(AbsVector v, AbsVector w) {
 		double divVal = 0;
 		double tempDivVal = 0;
@@ -79,6 +125,13 @@ public class VectorProcessor {
 	}
 	
 	
+	/**
+	 * Check if the vectors are orthogonal to each other
+	 * 
+	 * @param v
+	 * @param w
+	 * @return
+	 */
 	public static boolean isOrthogonal(AbsVector v, AbsVector w) {
 		if ((int) dotProduct(v, w) * 100 < 1e-10) {
 			//System.out.println(dotProduct(v, w));
@@ -88,6 +141,13 @@ public class VectorProcessor {
 	}
 	
 	
+	/**
+	 * Check if the vectors are parallel or orthogonal 
+	 * 
+	 * @param v
+	 * @param w
+	 * @return
+	 */
 	public static String isParallelOrOrthogonal(AbsVector v, AbsVector w) {
 		boolean isParallel = false;
 		boolean isOrthogonal = false;
@@ -106,11 +166,25 @@ public class VectorProcessor {
 		
 	}
 	
-	
+	/**
+	 * Get the projection of vector V on the base vector B
+	 * 
+	 * @param v
+	 * @param b
+	 * @return
+	 */
 	public static AbsVector projection(AbsVector v, NonUnitVector b) {
 		return scalarMul(dotProduct(v, b.getUnitVector()), b.getUnitVector());
 	}
 	
+	
+	/**
+	 * Get the Vector perpendicular / orthogonal to B wrt - V.
+	 * 
+	 * @param v
+	 * @param b
+	 * @return
+	 */
 	public static AbsVector getOrthogonalBetween(AbsVector v, NonUnitVector b) {
 		try {
 			return sub(v, projection(v, b));
@@ -119,5 +193,41 @@ public class VectorProcessor {
 		}
 		return new Vector(new double[]{0,0,0});
 	}
+	
+	
+	/**
+	 * Get the cross product between V and W. 
+	 * 
+	 * @param v
+	 * @param w
+	 * @return
+	 */
+	public static AbsVector crossProduct(AbsVector v, AbsVector w) {
+		double[] resultcorrdinates = new double[v.getCoordinates().length];
+		double interim1 = 0.0;
+		double interim2 = 0.0;
+		for (int i = 0; i < v.getCoordinates().length; i++ ) {
+			interim1 = w.getCoordinates()[(i + 1) % v.getCoordinates().length] * v.getCoordinates()[(i + 2) % v.getCoordinates().length];
+			interim2 = v.getCoordinates()[(i + 1) % v.getCoordinates().length] * w.getCoordinates()[(i + 2) % v.getCoordinates().length];
+			resultcorrdinates[i] = interim1 - interim2;
+		}
+		return new Vector(resultcorrdinates);		
+	}
+	
+	
+	/**
+	 * Get the cross product between V and W. 
+	 * 
+	 * @param v
+	 * @param w
+	 * @return
+	 */
+	public static double areaOfParallelogram(AbsVector v, AbsVector w) {
+		AbsVector resultantVector = crossProduct(v, w);
+		
+	}
+	
+	
+	
 	
 }
