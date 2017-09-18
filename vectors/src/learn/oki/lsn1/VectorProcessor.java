@@ -223,7 +223,7 @@ public class VectorProcessor {
 	 * @return
 	 */
 	public static double areaOfParallelogram(AbsVector v, AbsVector w) {
-		AbsVector resultantVector = crossProduct(v, w);
+		AbsVector resultantVector = crossProduct(v, w); 
 		
 	}
 	
