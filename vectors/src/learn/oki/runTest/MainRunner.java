@@ -7,10 +7,15 @@ public class MainRunner {
 
 	public static void main(String[] args) {
 
+		
 		// Assignment 1
 		try {
-			Vector v = new Vector(new double[] { 8.218, -9.341 });
-			Vector w = new Vector(new double[] { -1.129, 2.111 });
+			
+			Vector v = null;
+			Vector w = null;
+			/*
+			v = new Vector(new double[] { 8.218, -9.341 });
+			w = new Vector(new double[] { -1.129, 2.111 });
 			System.out.print("Sum : ");
 			System.out.println(VectorProcessor.sum(v, w));
 
@@ -91,6 +96,23 @@ public class MainRunner {
 			b = new Vector(new double[] {6.404,-9.144, 2.759, 8.718});
 			System.out.println(" 	" + VectorProcessor.projection(v, b));
 			System.out.println("	" + VectorProcessor.getOrthogonalBetween(v, b));
+			*/
+			
+			//Assignment 6
+			System.out.println("V X W - Cross Product");
+			v = new Vector(new double[] {8.462, 7.893, -8.187});
+			w = new Vector(new double[] {6.984, -5.975, 4.778});
+			System.out.println(" 	" + VectorProcessor.crossProduct(v, w));
+			
+			System.out.println("Area of Parallelogram spanned by v & w");
+			v = new Vector(new double[] {-8.987, -9.838, 5.031});
+			w = new Vector(new double[] {-4.268, -1.861, -8.866});
+			System.out.println(" 	" + VectorProcessor.areaOfParallelogram(v, w));
+			
+			System.out.println("Area of Triangle spanned by v & w");
+			v = new Vector(new double[] {1.5, 9.547, 3.691});			
+			w = new Vector(new double[] {-6.007, 0.124, 5.772});			
+			System.out.println(" 	" + (VectorProcessor.areaOfParallelogram(v, w))/2);
 
 		} catch (Exception e) {
 			e.printStackTrace();

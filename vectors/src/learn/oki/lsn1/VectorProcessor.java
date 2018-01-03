@@ -209,7 +209,7 @@ public class VectorProcessor {
 		for (int i = 0; i < v.getCoordinates().length; i++ ) {
 			interim1 = w.getCoordinates()[(i + 1) % v.getCoordinates().length] * v.getCoordinates()[(i + 2) % v.getCoordinates().length];
 			interim2 = v.getCoordinates()[(i + 1) % v.getCoordinates().length] * w.getCoordinates()[(i + 2) % v.getCoordinates().length];
-			resultcorrdinates[i] = interim1 - interim2;
+			resultcorrdinates[i] = interim2 - interim1;
 		}
 		return new Vector(resultcorrdinates);		
 	}
@@ -221,13 +221,10 @@ public class VectorProcessor {
 	 * @param v
 	 * @param w
 	 * @return
-	 *//*
+	 */
 	public static double areaOfParallelogram(AbsVector v, AbsVector w) {
 		AbsVector resultantVector = crossProduct(v, w); 
-		
-	}*/
-	
-	
-	
+		return resultantVector.getDimension();
+	}
 	
 }
