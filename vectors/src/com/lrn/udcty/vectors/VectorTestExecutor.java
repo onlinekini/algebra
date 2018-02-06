@@ -1,9 +1,6 @@
-package learn.oki.runTest;
+package com.lrn.udcty.vectors;
 
-import learn.oki.lsn1.Vector;
-import learn.oki.lsn1.VectorProcessor;
-
-public class MainRunner {
+public class VectorTestExecutor {
 
 	public static void main(String[] args) {
 

@@ -1,4 +1,4 @@
-package learn.oki.lsn1;
+package com.lrn.udcty.vectors;
 
 public interface NonUnitVector {
 	
